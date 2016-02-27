@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	
+	<title>Rick & Morty : Project</title>
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+		}
+
+		#debug {
+			position: absolute;
+			right: 20px;
+			top: 20px;
+
+			padding: 5px;
+
+			width: 100px;
+			height: 200px;
+
+			background-color: black;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div id="debug">Test</div>
+	<div id="container"><div>
+	
+
+	<script src="js/Constantes.js"></script>
+	<script src="js/Sprite.js"></script>
+	<script src="js/FieldSet.js"></script>
+	<script src="js/TileSet.js"></script>
+	<script src="js/MapGenerator.js"></script>
+	<script src="js/Map.js"></script>
+	<script src="js/Game.js"></script>
+	<script>
+		var Game = new Game();
+
+		Game.run("container", "debug");
+	</script>
+</body>
+</html>
