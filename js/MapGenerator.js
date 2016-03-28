@@ -1,15 +1,15 @@
 /**
- * Classe Map : Génération de map aléatoire
+ * Classe MapGenerator : Génération de map aléatoire
  */
 function MapGenerator() {
 
-	// const HEIGHTMAP_MAXVALUE = 255;
-	// const HEIGHTMAP_HALFVALUE = 128;
-	// const HEIGHTMAP_MINVALUE = 0;
-	 
-	const HEIGHTMAP_MAXVALUE = 64;
-	const HEIGHTMAP_HALFVALUE = 32;
+	const HEIGHTMAP_MAXVALUE = 255;
+	const HEIGHTMAP_HALFVALUE = 128;
 	const HEIGHTMAP_MINVALUE = 0;
+	 
+	// const HEIGHTMAP_MAXVALUE = 64;
+	// const HEIGHTMAP_HALFVALUE = 32;
+	// const HEIGHTMAP_MINVALUE = 0;
 
 	var minValue;
 	var maxValue;
@@ -28,7 +28,7 @@ function MapGenerator() {
 	/**
 	 * Génère une heightmap d'après l'algorithme Diamond Square.
 	 * @param  {[int]} MAP_SIZE    - Taille de l'heightmap. L'heightmap sera carré et sa taille doit être égale à 2^n + 1.
-	 * @param  {[boolean]} wrap    - Génération du bord de la map ? Si faux, cela permet d'affiche la map en la repetant.
+	 * @param  {[boolean]} wrap    - Génération du bord de la map ? Si faux, cela permet d'afficher la map en la repetant.
 	 * @param  {[float]} roughness - Dureté de la map
 	 * @return {[Array[int][int]]}           [description]
 	 */

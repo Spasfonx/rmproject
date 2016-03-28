@@ -34,4 +34,9 @@ var TileSet = {
 	"WATER_C_BL": new Sprite(Constantes.SPRITE_SIZE * 14, Constantes.SPRITE_SIZE * 0),
 	"WATER_C_TR": new Sprite(Constantes.SPRITE_SIZE * 13, Constantes.SPRITE_SIZE * 1),
 	"WATER_C_TL": new Sprite(Constantes.SPRITE_SIZE * 14, Constantes.SPRITE_SIZE * 1),
+
+	"WATER_DOUBLE_C_T": new Sprite(Constantes.SPRITE_SIZE * 18, Constantes.SPRITE_SIZE * 0),
+	"WATER_DOUBLE_C_L": new Sprite(Constantes.SPRITE_SIZE * 19, Constantes.SPRITE_SIZE * 0),
+	"WATER_DOUBLE_C_B": new Sprite(Constantes.SPRITE_SIZE * 18, Constantes.SPRITE_SIZE * 1),
+	"WATER_DOUBLE_C_R": new Sprite(Constantes.SPRITE_SIZE * 19, Constantes.SPRITE_SIZE * 1),
 };

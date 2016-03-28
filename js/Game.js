@@ -5,7 +5,7 @@ function Game() {
 	this.run = function(gameContainer, debugContainer) {
 
 		var mapGenerator = new MapGenerator();
-		var map          = mapGenerator.generateRandomMap(65, 0, 2, 1);
+		var map          = mapGenerator.generateRandomMap(17, 0, 2, 1);
 
 		Sprite.loadSprite();
 
@@ -21,6 +21,8 @@ function Game() {
 			debug.innerHTML = mapSize + "-" + map.minValueMap + "-" + map.maxValueMap;
 
 			map.drawMap(container);
+
+			
 		};
 
 	};
