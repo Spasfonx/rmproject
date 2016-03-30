@@ -12,20 +12,22 @@ function Tourelle() {
 	this.nbBullet = 0;
 	this.canShot = true;
 	this.degre = 0;
+	
 	this.tirer = function() {
-
 		if (this.canShot) {
 			this.canShot = false;
 			this.lesBullet[this.nbBullet] = new Bullet;
-			this.lesBullet[this.nbBullet].posX = -105*0.64;
-			this.lesBullet[this.nbBullet].posY = -10*0.64;
+			this.lesBullet[this.nbBullet].posX = -105 * 0.64;
+			this.lesBullet[this.nbBullet].posY = -10 * 0.64;
 			this.lesBullet[this.nbBullet].posXInit = this.posX;
 
 			this.lesBullet[this.nbBullet].posYInit = this.posY;
 			this.lesBullet[this.nbBullet].degrer = this.degre;
 			this.nbBullet++;
-
-			setTimeout(this.canShotReverse, 2000);
+			var maTourelle=this;
+			setTimeout(function() {
+				maTourelle.canShotReverse();
+			}, 1000);
 		}
 
 	};
@@ -49,19 +51,19 @@ function Tourelle() {
 
 		// draw it up and to the left by half the width
 		// and height of the image
-		leCtx.drawImage(Tourelle.image, -(this.tailleImgX*0.64)/2, -5,this.tailleImgX*0.64 -30,10);
+		leCtx.drawImage(Tourelle.image, -(this.tailleImgX * 0.64) / 2, -5,
+				this.tailleImgX * 0.64 - 30, 10);
 		leCtx.restore();
-		
-		for(var i=0;i<this.nbBullet;i++)
-		this.lesBullet[i].drawRotatedBullet(leCtx);
-		
+
+		for (var i = 0; i < this.nbBullet; i++)
+			this.lesBullet[i].drawRotatedBullet(leCtx);
+
 	}
 }
 
-
 Tourelle.image;
 
-Tourelle.loadTourelle=function(){
-	Tourelle.image=new Image();
-	Tourelle.image.src=Constantes.SRC_TOURELLE;
+Tourelle.loadTourelle = function() {
+	Tourelle.image = new Image();
+	Tourelle.image.src = Constantes.SRC_TOURELLE;
 }

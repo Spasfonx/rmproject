@@ -29,25 +29,18 @@ function Bullet() {
 	}
 
 	this.drawRotatedBullet = function(ctx) {
-		// save the current co-ordinate system
-		// before we screw with it
 		ctx.save();
 
-		// move to the middle of where we want to draw our image
-		ctx.translate(this.posX, this.posY);
+		ctx.translate(this.posXInit, this.posYInit);
 
-		// rotate around that point, converting our
-		// angle from degrees to radians
 		ctx.rotate(this.degrer * (Math.PI / 180));
 
-		// draw it up and to the left by half the width
-		// and height of the image
-
+		
 		ctx.drawImage(Bullet.image, (this.tailleX)
 				* this.etatSprite, 0,
 				this.tailleX,
 				this.tailleY,
-				this.posX++,
+				this.posX= this.posX -14,
 				this.posY, 40, 20);
 		ctx.restore();
 		this.changerSprite();
