@@ -43,8 +43,14 @@ function Game() {
 			soucoupe2.posY = map.player2StartPlaceY;
 			gamefield.innerHTML = "";
 			gamefield.appendChild(canvas);
-			
-			
+			var m="";
+			for (var i = 0; i <17; i++) {
+				for (var j = 0; j < 17; j++){
+					m+=map.mapField[i][j] + " ";
+				}
+				m+="\n";
+			}
+			console.log(m);
 		
 		draw();
 		}
@@ -53,16 +59,20 @@ function Game() {
 				requestAnimationFrame(draw);
 				ctx.clearRect(0, 0,canvas.width, canvas.height);
 				if (commande.downPress) {
+					if(map.isTraversable(((soucoupe1.posX+32)/Constantes.TILE_SIZE)+1,((soucoupe1.posY+32)/Constantes.TILE_SIZE)))
 					soucoupe1.bas();
 				
 				}
 				if (commande.upPress) {
+					if(map.isTraversable(((soucoupe1.posX+32)/Constantes.TILE_SIZE)-1,((soucoupe1.posY+32)/Constantes.TILE_SIZE)))
 					soucoupe1.haut();
 				}
 				if (commande.leftPress) {
+					if(map.isTraversable(((soucoupe1.posX+32)/Constantes.TILE_SIZE),((soucoupe1.posY+32)/Constantes.TILE_SIZE)+1))
 					soucoupe1.gauche();
 				}
 				if (commande.rightPress) {
+					if(map.isTraversable(((soucoupe1.posX+32)/Constantes.TILE_SIZE)+1,((soucoupe1.posY+32)/Constantes.TILE_SIZE)))
 					soucoupe1.droite();
 				}
 				if (commande.aPress) {
