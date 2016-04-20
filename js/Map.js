@@ -461,17 +461,17 @@ function Map() {
 	}
 
 	this.isTraversable = function(x, y) {
-		var roundX = Math.floor(x);
-		var roundY = Math.floor(y);
+		var roundX = Math.round(x);
+		var roundY = Math.round(y);
 		
 		for (var i = 0; i < this.mapField.lenght; i++) {
 			for (var j = 0; j < this.mapField[j].lenght; j++){
 				console.log(this.mapField[i][j] + " ");
 			}
 		}
-		console.log("round x "+roundX +" round y"+ roundY);
-		console.log( this.mapField[roundX][roundY] == 2);
-		return  this.mapField[roundX][roundY] == 2;
+		console.log("round x "+roundX +" round y"+ roundY+ "type"+this.mapField[roundX][roundY] );
+		console.log( this.mapField[roundY][roundX] == 2);
+		return  this.mapField[roundY][roundX] == 2;
 	}
 
 	/**
