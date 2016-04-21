@@ -37,10 +37,10 @@ function Game() {
 			canvas.height = map.mapGraphics[1].length * Constantes.TILE_SIZE;
 
 			ctx = canvas.getContext('2d');
-			soucoupe1.posX = map.player1StartPlaceX;
-			soucoupe1.posY = map.player1StartPlaceY;
-			soucoupe2.posX = map.player2StartPlaceX;
-			soucoupe2.posY = map.player2StartPlaceY;
+			soucoupe1.posX = map.player1StartPlaceX*Constantes.TILE_SIZE;
+			soucoupe1.posY = map.player1StartPlaceY*Constantes.TILE_SIZE;
+			soucoupe2.posX = map.player2StartPlaceX*Constantes.TILE_SIZE;
+			soucoupe2.posY = map.player2StartPlaceY*Constantes.TILE_SIZE;
 			gamefield.innerHTML = "";
 			gamefield.appendChild(canvas);
 			var m="   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 \n";
@@ -90,7 +90,7 @@ function Game() {
 					soucoupe1.uneTourelle.tirer();
 
 				}
-
+				soucoupe2.drawSoucoupe(ctx);
 				soucoupe1.drawSoucoupe(ctx);
 				
 			},1000/Constantes.NBFPS);

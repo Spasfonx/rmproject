@@ -40,7 +40,7 @@ function Bullet() {
 				* this.etatSprite, 0,
 				this.tailleX,
 				this.tailleY,
-				this.posX= this.posX -14,
+				this.posX= this.posX -25,
 				this.posY, 40, 20);
 		ctx.restore();
 		this.changerSprite();
