@@ -70,8 +70,8 @@ function Soucoupe() {
 
 			if (uneBullet) {
 				uneBullet.truePos();
-				if ((uneBullet.trueX - 55 >= this.posX)
-						&& (uneBullet.trueX - 55 <= this.posX + Constantes.TILE_SIZE)
+				if ((uneBullet.trueX  >= this.posX)
+						&& (uneBullet.trueX  <= this.posX + Constantes.TILE_SIZE)
 						&& (uneBullet.trueY - 20 >= this.posY)
 						&& (uneBullet.trueY - 20 <= this.posY + Constantes.TILE_SIZE)) {
 					alert("La balle touche");
@@ -80,6 +80,12 @@ function Soucoupe() {
 				}
 			}
 		}
+	}
+	
+	
+	this.initPosTourelle = function (){
+		this.uneTourelle.posX = this.posX + 50 * 0.64;
+		this.uneTourelle.posY = this.posY + 50 * 0.64;
 	}
 
 }

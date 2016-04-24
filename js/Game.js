@@ -46,6 +46,8 @@ function Game() {
 			soucoupe1.soucoupeImagevie = Soucoupe.imagemorty;
 			soucoupe2.soucoupeImagevie = Soucoupe.imagerick;
 			
+			soucoupe1.initPosTourelle();
+			soucoupe2.initPosTourelle();
 			gamefield.innerHTML = "";
 			gamefield.appendChild(canvas);
 			var m = "   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 \n";
