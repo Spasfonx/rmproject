@@ -70,10 +70,10 @@ function Soucoupe() {
 
 			if (uneBullet) {
 				uneBullet.truePos();
-				if ((uneBullet.trueX - 55 > this.posX)
-						&& (uneBullet.trueX - 55 < this.posX + 32)
-						&& (uneBullet.trueY - 20 > this.posY)
-						&& (uneBullet.trueY - 20 < this.posY + 32)) {
+				if ((uneBullet.trueX - 55 >= this.posX)
+						&& (uneBullet.trueX - 55 <= this.posX + Constantes.TILE_SIZE)
+						&& (uneBullet.trueY - 20 >= this.posY)
+						&& (uneBullet.trueY - 20 <= this.posY + Constantes.TILE_SIZE)) {
 					alert("La balle touche");
 					this.vie = this.vie - uneBullet.damage;
 					Soucoupe.uneTourelle.lesBullet[i] = null;
