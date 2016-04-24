@@ -56,6 +56,7 @@ function Tourelle() {
 		leCtx.restore();
 
 		for (var i = 0; i < this.nbBullet; i++)
+			if (this.lesBullet[i])
 			this.lesBullet[i].drawRotatedBullet(leCtx);
 
 	}

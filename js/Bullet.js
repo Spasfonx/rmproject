@@ -6,6 +6,7 @@ function Bullet() {
 	this.posY = 0;
 	this.trueX;
 	this.trueY;
+	this.damage=1;	
 	this.posXInit = 0;
 	this.posYInit = 0;
 	this.image = new Image();

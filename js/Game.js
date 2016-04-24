@@ -37,123 +37,230 @@ function Game() {
 			canvas.height = map.mapGraphics[1].length * Constantes.TILE_SIZE;
 
 			ctx = canvas.getContext('2d');
-			soucoupe1.posX = map.player1StartPlaceX*Constantes.TILE_SIZE;
-			soucoupe1.posY = map.player1StartPlaceY*Constantes.TILE_SIZE;
-			soucoupe2.posX = map.player2StartPlaceX*Constantes.TILE_SIZE;
-			soucoupe2.posY = map.player2StartPlaceY*Constantes.TILE_SIZE;
+			soucoupe1.posY = map.player1StartPlaceX * Constantes.TILE_SIZE;
+			soucoupe1.posX = map.player1StartPlaceY * Constantes.TILE_SIZE;
+			soucoupe2.posY = map.player2StartPlaceX * Constantes.TILE_SIZE;
+			soucoupe2.posX = map.player2StartPlaceY * Constantes.TILE_SIZE;
+			soucoupe1.posInitX=100;
+			soucoupe2.posInitX=700;
+			soucoupe1.soucoupeImagevie = Soucoupe.imagemorty;
+			soucoupe2.soucoupeImagevie = Soucoupe.imagerick;
+			
 			gamefield.innerHTML = "";
 			gamefield.appendChild(canvas);
-			var m="   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 \n";
-			for (var i = 0; i <17; i++) {
-				if(i<10)
-				m+=i+"  ";
+			var m = "   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 \n";
+			for (var i = 0; i < 17; i++) {
+				if (i < 10)
+					m += i + "  ";
 				else
-				m+=i+" ";
-				for (var j = 0; j < 17; j++){
-					
-					m+= map.mapField[i][j] + "  ";
+					m += i + " ";
+				for (var j = 0; j < 17; j++) {
+
+					m += map.mapField[i][j] + "  ";
 				}
-				m+="\n";
+				m += "\n";
 			}
 			console.log(m);
-		
-		draw();
+
+			draw();
 		}
 		function draw() {
 			setTimeout(function() {
 				requestAnimationFrame(draw);
-				ctx.clearRect(0, 0,canvas.width, canvas.height);
-				if (commande.downPress) {
-					if(map.isTraversable(((soucoupe1.posX)/Constantes.TILE_SIZE),((soucoupe1.posY+32)/Constantes.TILE_SIZE)))
-					soucoupe1.bas();
-				
-				}
-				if (commande.upPress) {
-					if(map.isTraversable(((soucoupe1.posX)/Constantes.TILE_SIZE),((soucoupe1.posY-32)/Constantes.TILE_SIZE)))
-					soucoupe1.haut();
-				}
-				if (commande.leftPress) {
-					if(map.isTraversable((((soucoupe1.posX-32)/Constantes.TILE_SIZE)),((soucoupe1.posY)/Constantes.TILE_SIZE)))
-					soucoupe1.gauche();
-				}
-				if (commande.rightPress) {
-					if(map.isTraversable(((soucoupe1.posX+32)/Constantes.TILE_SIZE),((soucoupe1.posY)/Constantes.TILE_SIZE)))
-					soucoupe1.droite();
-				}
-				if (commande.aPress) {
-					soucoupe1.uneTourelle.degre -= 4;
-				}
-				if (commande.ePress) {
-					soucoupe1.uneTourelle.degre += 4;
-				}
-				if (commande.spacePress) {
-					soucoupe1.uneTourelle.tirer();
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-				}
-				soucoupe2.drawSoucoupe(ctx);
+				activeCommande();
+				
+				
+				if (soucoupe2.vie>0)
+					soucoupe2.drawSoucoupe(ctx);
+
+				if(soucoupe1.vie>0)
 				soucoupe1.drawSoucoupe(ctx);
-				
-			},1000/Constantes.NBFPS);
-	};
-	 $(window).keydown(function (e) {
-         // alert(scp1.vitesse); 
-         if (e.keyCode == commande.arrowDown) {
 
-             commande.downPress = true;
-         }
-         if (e.keyCode == commande.arrowLeft) {
-             commande.leftPress = true;
-         }
-         if (e.keyCode == commande.arrowRight) {
-             commande.rightPress = true;
-         }
-         if (e.keyCode == commande.arrowUp) {
-             commande.upPress = true;
+				soucoupe1.testDamage(soucoupe2);
+				soucoupe2.testDamage(soucoupe1);
 
-         }
+			}, 1000 / Constantes.NBFPS);
+		}
+		;
+		$(window).keydown(function(e) {
+			// alert(scp1.vitesse);
+			if (e.keyCode == commande.arrowDown) {
+				commande.downPress = true;
+			}
+			if (e.keyCode == commande.arrowLeft) {
+				commande.leftPress = true;
+			}
+			if (e.keyCode == commande.arrowRight) {
+				commande.rightPress = true;
+			}
+			if (e.keyCode == commande.arrowUp) {
+				commande.upPress = true;
 
-         if (e.keyCode == commande.aKey) {
-             commande.aPress = true;
-         }
-         if (e.keyCode == commande.eKey) {
-             commande.ePress = true;
-         }
+			}
+			if (e.keyCode == commande.turnLeft1) {
+				commande.turnLeft1Press = true;
+			}
+			if (e.keyCode == commande.turnRight1) {
+				commande.turnRight1Press = true;
+			}
 
-         if (e.keyCode == commande.spaceKey) {
-             commande.spacePress = true;
-             //    alert(scp1.uneTourelle.nbBullet);
-         }
+			if (e.keyCode == commande.shot1) {
+				commande.shot1Press = true;
+			}
 
-     });
+			if (e.keyCode == commande.arrowDown2) {
 
-     $(window).keyup(function (e) {
-         // alert(scp1.vitesse); 
-         if (e.keyCode == commande.arrowDown) {
+				commande.downPress2 = true;
+			}
+			if (e.keyCode == commande.arrowLeft2) {
+				commande.leftPress2 = true;
+			}
+			if (e.keyCode == commande.arrowRight2) {
+				commande.rightPress2 = true;
+			}
+			if (e.keyCode == commande.arrowUp2) {
+				commande.upPress2 = true;
 
-             commande.downPress = false;
-         }
-         if (e.keyCode == commande.arrowLeft) {
-             commande.leftPress = false;
-         }
-         if (e.keyCode == commande.arrowRight) {
-             commande.rightPress = false;
-         }
-         if (e.keyCode == commande.arrowUp) {
-             commande.upPress = false;
+			}
+			if (e.keyCode == commande.turnLeft2) {
+				commande.turnLeft2Press = true;
+			}
+			if (e.keyCode == commande.turnRight2) {
+				commande.turnRight2Press = true;
+			}
 
-         }
-         if (e.keyCode == commande.aKey) {
-             commande.aPress = false;
-         }
-         if (e.keyCode == commande.eKey) {
-             commande.ePress = false;
-         }
+			if (e.keyCode == commande.shot2) {
+				commande.shot2Press = true;
+			}
 
-         if (e.keyCode == commande.spaceKey) {
-             commande.spacePress = false;
-         }
+		});
 
+		$(window).keyup(function(e) {
 
-     });
+			if (e.keyCode == commande.arrowDown) {
+				commande.downPress = false;
+			}
+			if (e.keyCode == commande.arrowLeft) {
+				commande.leftPress = false;
+			}
+			if (e.keyCode == commande.arrowRight) {
+				commande.rightPress = false;
+			}
+			if (e.keyCode == commande.arrowUp) {
+				commande.upPress = false;
+
+			}
+			if (e.keyCode == commande.turnLeft1) {
+				commande.turnLeft1Press = false;
+			}
+			if (e.keyCode == commande.turnRight1) {
+				commande.turnRight1Press = false;
+			}
+
+			if (e.keyCode == commande.shot1) {
+				commande.shot1Press = false;
+			}
+
+			if (e.keyCode == commande.arrowDown2) {
+
+				commande.downPress2 = false;
+			}
+			if (e.keyCode == commande.arrowLeft2) {
+				commande.leftPress2 = false;
+			}
+			if (e.keyCode == commande.arrowRight2) {
+				commande.rightPress2 = false;
+			}
+			if (e.keyCode == commande.arrowUp2) {
+				commande.upPress2 = false;
+
+			}
+			if (e.keyCode == commande.turnLeft2) {
+				commande.turnLeft2Press = false;
+			}
+			if (e.keyCode == commande.turnRight2) {
+				commande.turnRight2Press = false;
+			}
+
+			if (e.keyCode == commande.shot2) {
+				commande.shot2Press = false;
+			}
+
+		});
+
+		function activeCommande() {
+			if (commande.downPress) {
+				if (map.isTraversable(
+						((soucoupe1.posX) / Constantes.TILE_SIZE),
+						((soucoupe1.posY + 32) / Constantes.TILE_SIZE)))
+					soucoupe1.bas();
+
+			}
+			if (commande.upPress) {
+				if (map.isTraversable(
+						((soucoupe1.posX) / Constantes.TILE_SIZE),
+						((soucoupe1.posY - 32) / Constantes.TILE_SIZE)))
+					soucoupe1.haut();
+			}
+			if (commande.leftPress) {
+				if (map.isTraversable(
+						(((soucoupe1.posX - 32) / Constantes.TILE_SIZE)),
+						((soucoupe1.posY) / Constantes.TILE_SIZE)))
+					soucoupe1.gauche();
+			}
+			if (commande.rightPress) {
+				if (map.isTraversable(
+						((soucoupe1.posX + 32) / Constantes.TILE_SIZE),
+						((soucoupe1.posY) / Constantes.TILE_SIZE)))
+					soucoupe1.droite();
+			}
+			if (commande.turnLeft1Press) {
+				soucoupe1.uneTourelle.degre -= 4;
+			}
+			if (commande.turnRight1Press) {
+				soucoupe1.uneTourelle.degre += 4;
+			}
+			if (commande.shot1Press) {
+				soucoupe1.uneTourelle.tirer();
+			}
+
+			if (commande.downPress2) {
+				if (map.isTraversable(
+						((soucoupe2.posX) / Constantes.TILE_SIZE),
+						((soucoupe2.posY + 32) / Constantes.TILE_SIZE)))
+					soucoupe2.bas();
+
+			}
+			if (commande.upPress2) {
+				if (map.isTraversable(
+						((soucoupe2.posX) / Constantes.TILE_SIZE),
+						((soucoupe2.posY - 32) / Constantes.TILE_SIZE)))
+					soucoupe2.haut();
+			}
+			if (commande.leftPress2) {
+				if (map.isTraversable(
+						(((soucoupe2.posX - 32) / Constantes.TILE_SIZE)),
+						((soucoupe2.posY) / Constantes.TILE_SIZE)))
+					soucoupe2.gauche();
+			}
+			if (commande.rightPress2) {
+				if (map.isTraversable(
+						((soucoupe2.posX + 32) / Constantes.TILE_SIZE),
+						((soucoupe2.posY) / Constantes.TILE_SIZE)))
+					soucoupe2.droite();
+			}
+			if (commande.turnLeft2Press) {
+				soucoupe2.uneTourelle.degre -= 4;
+			}
+			if (commande.turnRight2Press) {
+				soucoupe2.uneTourelle.degre += 4;
+			}
+			if (commande.shot2Press) {
+				soucoupe2.uneTourelle.tirer();
+			}
+
+		}
 	}
 }
