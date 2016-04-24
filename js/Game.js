@@ -1,8 +1,12 @@
-"use strict";
 
 function Game() {
 
+
+		
+	var self=this;
+	
 	this.run = function(gameContainer, debugContainer, gameField) {
+		console.log("test");
 
 		var mapGenerator = new MapGenerator();
 		var map = mapGenerator.generateRandomMap(17, 0, 2, 1);
@@ -14,9 +18,9 @@ function Game() {
 		Soucoupe.loadSoucoupe();
 		Tourelle.loadTourelle();
 		Bullet.loadBullet();
-
+		var termine=false;
 		Sprite.loadSprite();
-
+		var self=this;
 		window.onload = function() {
 			var container = document.getElementById(gameContainer);
 			var gamefield = document.getElementById(gameField);
@@ -28,8 +32,7 @@ function Game() {
 
 			var mapSize = Math.pow(2, n) + 1;
 
-			debug.innerHTML = mapSize + "-" + map.minValueMap + "-"
-					+ map.maxValueMap;
+	
 
 			map.drawMap(container);
 			canvas = document.createElement("canvas");
@@ -49,7 +52,7 @@ function Game() {
 			soucoupe1.initPosTourelle();
 			soucoupe2.initPosTourelle();
 			gamefield.innerHTML = "";
-			gamefield.appendChild(canvas);
+			container.appendChild(canvas);
 			var m = "   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 \n";
 			for (var i = 0; i < 17; i++) {
 				if (i < 10)
@@ -63,26 +66,114 @@ function Game() {
 				m += "\n";
 			}
 			console.log(m);
-
+		
 			draw();
 		}
+		
+		
+		function activeCommande() {
+			if (commande.downPress) {
+				if (map.isTraversable(
+						((soucoupe1.posX) / Constantes.TILE_SIZE),
+						((soucoupe1.posY + 32) / Constantes.TILE_SIZE)))
+					soucoupe1.bas();
+
+			}
+			if (commande.upPress) {
+				if (map.isTraversable(
+						((soucoupe1.posX) / Constantes.TILE_SIZE),
+						((soucoupe1.posY - 32) / Constantes.TILE_SIZE)))
+					soucoupe1.haut();
+			}
+			if (commande.leftPress) {
+				if (map.isTraversable(
+						(((soucoupe1.posX - 32) / Constantes.TILE_SIZE)),
+						((soucoupe1.posY) / Constantes.TILE_SIZE)))
+					soucoupe1.gauche();
+			}
+			if (commande.rightPress) {
+				if (map.isTraversable(
+						((soucoupe1.posX + 32) / Constantes.TILE_SIZE),
+						((soucoupe1.posY) / Constantes.TILE_SIZE)))
+					soucoupe1.droite();
+			}
+			if (commande.turnLeft1Press) {
+				soucoupe1.uneTourelle.degre -= 4;
+			}
+			if (commande.turnRight1Press) {
+				soucoupe1.uneTourelle.degre += 4;
+			}
+			if (commande.shot1Press) {
+				soucoupe1.uneTourelle.tirer();
+			}
+
+			if (commande.downPress2) {
+				if (map.isTraversable(
+						((soucoupe2.posX) / Constantes.TILE_SIZE),
+						((soucoupe2.posY + 32) / Constantes.TILE_SIZE)))
+					soucoupe2.bas();
+
+			}
+			if (commande.upPress2) {
+				if (map.isTraversable(
+						((soucoupe2.posX) / Constantes.TILE_SIZE),
+						((soucoupe2.posY - 32) / Constantes.TILE_SIZE)))
+					soucoupe2.haut();
+			}
+			if (commande.leftPress2) {
+				if (map.isTraversable(
+						(((soucoupe2.posX - 32) / Constantes.TILE_SIZE)),
+						((soucoupe2.posY) / Constantes.TILE_SIZE)))
+					soucoupe2.gauche();
+			}
+			if (commande.rightPress2) {
+				if (map.isTraversable(
+						((soucoupe2.posX + 32) / Constantes.TILE_SIZE),
+						((soucoupe2.posY) / Constantes.TILE_SIZE)))
+					soucoupe2.droite();
+			}
+			if (commande.turnLeft2Press) {
+				soucoupe2.uneTourelle.degre -= 4;
+			}
+			if (commande.turnRight2Press) {
+				soucoupe2.uneTourelle.degre += 4;
+			}
+			if (commande.shot2Press) {
+				soucoupe2.uneTourelle.tirer();
+			}
+
+		}
+		
 		function draw() {
 			setTimeout(function() {
+				
 				requestAnimationFrame(draw);
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 				activeCommande();
 				
 				
-				if (soucoupe2.vie>0)
+				if (soucoupe2.vie>0){
 					soucoupe2.drawSoucoupe(ctx);
-
-				if(soucoupe1.vie>0)
+				//	return;
+				}else{
+					termine=true;
+					window.location.reload();
+				}
+				if(soucoupe1.vie>0){
 				soucoupe1.drawSoucoupe(ctx);
+				
+				}else{
+					termine=true;
+					window.location.reload();
+				}
 
 				soucoupe1.testDamage(soucoupe2);
 				soucoupe2.testDamage(soucoupe1);
-
+			
+			
+				
+			
 			}, 1000 / Constantes.NBFPS);
 		}
 		;
@@ -192,77 +283,15 @@ function Game() {
 
 		});
 
-		function activeCommande() {
-			if (commande.downPress) {
-				if (map.isTraversable(
-						((soucoupe1.posX) / Constantes.TILE_SIZE),
-						((soucoupe1.posY + 32) / Constantes.TILE_SIZE)))
-					soucoupe1.bas();
+	
+		
 
-			}
-			if (commande.upPress) {
-				if (map.isTraversable(
-						((soucoupe1.posX) / Constantes.TILE_SIZE),
-						((soucoupe1.posY - 32) / Constantes.TILE_SIZE)))
-					soucoupe1.haut();
-			}
-			if (commande.leftPress) {
-				if (map.isTraversable(
-						(((soucoupe1.posX - 32) / Constantes.TILE_SIZE)),
-						((soucoupe1.posY) / Constantes.TILE_SIZE)))
-					soucoupe1.gauche();
-			}
-			if (commande.rightPress) {
-				if (map.isTraversable(
-						((soucoupe1.posX + 32) / Constantes.TILE_SIZE),
-						((soucoupe1.posY) / Constantes.TILE_SIZE)))
-					soucoupe1.droite();
-			}
-			if (commande.turnLeft1Press) {
-				soucoupe1.uneTourelle.degre -= 4;
-			}
-			if (commande.turnRight1Press) {
-				soucoupe1.uneTourelle.degre += 4;
-			}
-			if (commande.shot1Press) {
-				soucoupe1.uneTourelle.tirer();
-			}
-
-			if (commande.downPress2) {
-				if (map.isTraversable(
-						((soucoupe2.posX) / Constantes.TILE_SIZE),
-						((soucoupe2.posY + 32) / Constantes.TILE_SIZE)))
-					soucoupe2.bas();
-
-			}
-			if (commande.upPress2) {
-				if (map.isTraversable(
-						((soucoupe2.posX) / Constantes.TILE_SIZE),
-						((soucoupe2.posY - 32) / Constantes.TILE_SIZE)))
-					soucoupe2.haut();
-			}
-			if (commande.leftPress2) {
-				if (map.isTraversable(
-						(((soucoupe2.posX - 32) / Constantes.TILE_SIZE)),
-						((soucoupe2.posY) / Constantes.TILE_SIZE)))
-					soucoupe2.gauche();
-			}
-			if (commande.rightPress2) {
-				if (map.isTraversable(
-						((soucoupe2.posX + 32) / Constantes.TILE_SIZE),
-						((soucoupe2.posY) / Constantes.TILE_SIZE)))
-					soucoupe2.droite();
-			}
-			if (commande.turnLeft2Press) {
-				soucoupe2.uneTourelle.degre -= 4;
-			}
-			if (commande.turnRight2Press) {
-				soucoupe2.uneTourelle.degre += 4;
-			}
-			if (commande.shot2Press) {
-				soucoupe2.uneTourelle.tirer();
-			}
-
-		}
+	
 	}
+
+	
+
 }
+
+
+	

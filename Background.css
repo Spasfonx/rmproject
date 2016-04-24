@@ -1,0 +1,38 @@
+body {
+	background: url(img/BackGround.jpg) no-repeat center top;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-ms-background-size: cover;
+	-o-background-size: cover;
+	background-size: 100%;
+}
+
+.fight {
+	background: url(img/backgroundFight.png) no-repeat center top;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-ms-background-size: cover;
+	-o-background-size: cover;
+	background-size: 100%;
+}
+}
+
+.inVisible {
+	visibility: hidden;
+}
+
+
+.visible {
+	visibility: visible;
+}
+
+#global {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%; /* largeur obligatoire pour être centré */
+}
+
+body {
+	margin: 0; /* pour éviter les marges */
+}
