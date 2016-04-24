@@ -111,15 +111,6 @@ function Map() {
 			posY += Constantes.TILE_SIZE;
 		}
 
-		// ctx.beginPath();
-		// ctx.rect(0, 0, document.body.scrollWidth,
-		// document.body.scrollHeight);
-		// ctx.lineWidth = 10;
-		// ctx.strokeStyle = "#ff0000";
-		// ctx.stroke();
-		// ctx.closePath();
-		// 
-
 		if (Constantes.DEBUG) {
 			// Dessin de la position de départ des deux joueurs
 			ctx.beginPath();

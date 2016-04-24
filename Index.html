@@ -1,94 +1,88 @@
 <html>
-<head>
-<link rel="stylesheet" href="Background.css" />
-<!-- Librairies -->
-<script src="js/lib/astar.js"></script>
+	<head>
+		<title>Kill them morty !</title>
 
+		<meta charset="utf-8" />
+		<link rel="icon" href="img/favicon.ico" />
+		<link rel="stylesheet" href="Background.css" media="all" />
 
-
-<title>Rick & Morty : Project</title>
-<style>
-	html, body {
-		margin: 0;
-		padding: 0;
-	}
-	
-	#debug {
-		position: absolute;
-		right: 20px;
-		top: 20px;
-		padding: 5px;
-		width: 100px;
-		height: 200px;
-		background-color: black;
-		color: white;
-	}
-	
-	#container {
-	
-	
-	visibility:hidden;
-	  position: relative; /* on positionne le conteneur */
-  margin-left: auto;
-  margin-right: auto;
-
-  text-align: left;
-	width: 50%; /* largeur obligatoire pour être centré */
-	}
-	
-	#game {
-	
-		position: absolute;
-	
-	}
-	
-	#game canvas {
-
-	float:right;
-	}
-	
-	canvas {
-	
-		position: absolute;
-		float:right;
-		margin-top:150px;
-	}
-</style>
-</head>
-<body >
-<div id="global">
-	
-	<div id="container" class="inVisible"></div>
-	<div id="game" ></div>
-</div>
-
-	<!-- Classes -->
-	<script src="js/jquery-2.2.3.min.js"></script>
-	<script src="js/Constantes.js"></script>
-	<script src="js/Sprite.js"></script>
-	<script src="js/FieldSet.js"></script>
-	<script src="js/TileSet.js"></script>
-	<script src="js/MapGenerator.js"></script>
-	<script src="js/Map.js"></script>
-	<script src="js/Game.js"></script>
-	<script src="js/Bullet.js"></script>
-	<script src="js/Tourelle.js"></script>
-	<script src="js/Soucoupe.js"></script>
-	<script src="js/Commande.js"></script>
-	<script>
-		var Game = new Game();
-		
-		Game.run('container', 'debug', 'game');
-	
-		$("body").on("click", function(e) {
+		<style>
+			html, body {
+				margin: 0;
+				padding: 0;
+			}
 			
-			//
-			$('body').toggleClass('fight');
-			$('#container').css("visibility","visible");
-			e.preventDefault();
+			#debug {
+				position: absolute;
+				right: 20px;
+				top: 20px;
+				padding: 5px;
+				width: 100px;
+				height: 200px;
+				background-color: black;
+				color: white;
+			}
 			
-		});
+			#container {
+				visibility: hidden;
+				position: relative; /* on positionne le conteneur */
+			  	margin-left: auto;
+			  	margin-right: auto;
+
+			  	text-align: left;
+				width: 50%; /* largeur obligatoire pour être centré */
+			}
+			
+			#game {
+				position: absolute;
+			}
+			
+			#game canvas {
+				float: right;
+			}
+			
+			canvas {
+				position: absolute;
+				float: right;
+				margin-top: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="global">
+			<div id="container" class="inVisible"></div>
+			<div id="game" ></div>
+		</div>
+
+		<!-- Librairies -->
+		<script src="js/lib/astar.js"></script>
+		<script src="js/lib/jquery-2.2.3.min.js"></script>
+
+		<!-- Classes -->
+		<script src="js/Constantes.js"></script>
+		<script src="js/Sprite.js"></script>
+		<script src="js/FieldSet.js"></script>
+		<script src="js/TileSet.js"></script>
+		<script src="js/MapGenerator.js"></script>
+		<script src="js/Map.js"></script>
+		<script src="js/Game.js"></script>
+		<script src="js/Bullet.js"></script>
+		<script src="js/Tourelle.js"></script>
+		<script src="js/Soucoupe.js"></script>
+		<script src="js/Commande.js"></script>
+		<script>
+			var Game = new Game();
+			
+			Game.run('container', 'debug', 'game');
 		
-	</script>
-</body>
+			$("body").on("click", function(e) {
+				
+				$('body').toggleClass('fight');
+				$('#container').css("visibility","visible");
+				e.preventDefault();
+				
+			});
+			
+		</script>
+	</body>
 </html>

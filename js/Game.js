@@ -6,7 +6,6 @@ function Game() {
 	var self=this;
 	
 	this.run = function(gameContainer, debugContainer, gameField) {
-		console.log("test");
 
 		var mapGenerator = new MapGenerator();
 		var map = mapGenerator.generateRandomMap(17, 0, 2, 1);
@@ -21,18 +20,12 @@ function Game() {
 		var termine=false;
 		Sprite.loadSprite();
 		var self=this;
+
 		window.onload = function() {
 			var container = document.getElementById(gameContainer);
 			var gamefield = document.getElementById(gameField);
 			var debug = debugContainer !== null ? document
 					.getElementById(debugContainer) : null;
-
-			var n = Math.log(document.body.scrollWidth / 32 - 1) / Math.log(2);
-			n = Math.ceil(n);
-
-			var mapSize = Math.pow(2, n) + 1;
-
-	
 
 			map.drawMap(container);
 			canvas = document.createElement("canvas");
@@ -65,7 +58,6 @@ function Game() {
 				}
 				m += "\n";
 			}
-			console.log(m);
 		
 			draw();
 		}
@@ -282,15 +274,7 @@ function Game() {
 			}
 
 		});
-
-	
-		
-
-	
 	}
-
-	
-
 }
 
 

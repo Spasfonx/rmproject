@@ -15,12 +15,10 @@ body {
 	-o-background-size: cover;
 	background-size: 100%;
 }
-}
 
 .inVisible {
 	visibility: hidden;
 }
-
 
 .visible {
 	visibility: visible;
